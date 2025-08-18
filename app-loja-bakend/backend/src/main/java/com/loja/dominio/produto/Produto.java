@@ -1,9 +1,9 @@
-package com.loja.backend.modelo;
+package com.loja.dominio.produto;
 
 import java.math.BigDecimal;
 import java.util.Locale.Category;
 
-import com.loja.backend.categoria.Categoria;
+import com.loja.dominio.categoria.Categoria;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor      // Construtor vazio para instanciamentos
 @AllArgsConstructor     // Construtor com entras
 @Builder                // Permite usar o padrão Builder
-public class Modelo {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

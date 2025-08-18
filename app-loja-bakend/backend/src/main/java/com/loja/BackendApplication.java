@@ -1,4 +1,4 @@
-package com.loja.backend;
+package com.loja;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
