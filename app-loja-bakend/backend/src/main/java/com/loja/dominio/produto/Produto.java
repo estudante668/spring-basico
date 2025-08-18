@@ -1,7 +1,7 @@
 package com.loja.dominio.produto;
 
 import java.math.BigDecimal;
-import java.util.Locale.Category;
+
 
 import com.loja.dominio.categoria.Categoria;
 
