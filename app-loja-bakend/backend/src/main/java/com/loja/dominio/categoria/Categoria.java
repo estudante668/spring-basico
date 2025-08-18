@@ -10,8 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data                   // Gera getters, setters, toString, equals, hashCode
-@NoArgsConstructor      // Construtor vazio
+@Data                   // Acessos
+@NoArgsConstructor      // Construtor padrão api's
 @AllArgsConstructor     // Construtor com todos os atributos
 @Builder                // Padrão Builder
 public class Categoria {

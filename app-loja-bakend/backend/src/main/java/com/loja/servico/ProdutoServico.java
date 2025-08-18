@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.loja.dominio.produto.Produto;
 import com.loja.dominio.repositorio.ProdutoRepositorio;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ProdutoServico {
 
@@ -31,7 +33,9 @@ public class ProdutoServico {
     }
 
     public void delete(Long id) {
-        produtoRepositorio.deleteById(id);
+    if (!produtoRepositorio.existsById(id)) {
+        throw new EntityNotFoundException("Produto não encontrado com ID: " + id);
     }
- 
+    produtoRepositorio.deleteById(id);
+}
 }
