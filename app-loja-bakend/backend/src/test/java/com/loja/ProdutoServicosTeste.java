@@ -11,6 +11,7 @@ import com.loja.dominio.produto.Produto;
 import com.loja.dominio.repositorio.ProdutoRepositorio;
 import com.loja.servico.ProdutoServico;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.mockito.Mockito.*;
@@ -31,6 +32,12 @@ public class ProdutoServicosTeste {
         closeable = MockitoAnnotations.openMocks(this);
     }
 
+//fechando closeable
+    @AfterEach
+    void tearDown() throws Exception {
+    closeable.close();
+}
+
     @Test
     void deveBuscarModeloPorId() {
         Produto produto = new Produto(1L, "ola");
@@ -40,7 +47,10 @@ public class ProdutoServicosTeste {
 
         assertTrue(resultado.isPresent());
         assertEquals("ola", resultado.get().getNome());
+
+        verify(produtoRepositorio, times(1)).findById(1L);
     }
+
 }
 
 
