@@ -12,17 +12,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
 @Data                   // Lombok cria os acessos da classe
-@NoArgsConstructor      // Construtor vazio para instanciamentos
-@AllArgsConstructor     // Construtor com entras
-@Builder                // Permite usar o padrão Builder
+@NoArgsConstructor      // Construtor vazio para instanciamentos           
 public class Produto {
 
     @Id
@@ -41,6 +37,11 @@ public class Produto {
     private String description;
 
     private boolean active;
+
+    public Produto(Long id, @NotBlank String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
 }
 

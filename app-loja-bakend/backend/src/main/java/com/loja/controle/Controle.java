@@ -31,32 +31,32 @@ public class Controle {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> getById(@PathVariable Long id) {
-        return produtoServico.findById(id)
+    public ResponseEntity<Produto> BuscarPorId(@PathVariable Long id) {
+        return produtoServico.listarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Produto create(@RequestBody Produto produto) {
-        return produtoServico.save(produto);
+    public Produto criar(@RequestBody Produto produto) {
+        return produtoServico.salvar(produto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto produto) {
-        return produtoServico.findById(id)
+    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+        return produtoServico.listarPorId(id)
                 .map(existing -> {
                     produto.setId(id);
-                    return ResponseEntity.ok(produtoServico.save(produto));
+                    return ResponseEntity.ok(produtoServico.salvar(produto));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
-        return produtoServico.findById(id)
+        return produtoServico.listarPorId(id)
                 .map(existing -> {
-                    produtoServico.delete(id);
+                    produtoServico.deletar(id);
                     return ResponseEntity.noContent().build();
                 })
                 .orElse(ResponseEntity.notFound().build());

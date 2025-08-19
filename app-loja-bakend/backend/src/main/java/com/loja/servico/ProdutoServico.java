@@ -24,15 +24,15 @@ public class ProdutoServico {
     }
 
     
-    public Optional<Produto> findById(Long id) {
+    public Optional<Produto> listarPorId(Long id) {
         return produtoRepositorio.findById(id);
     }
 
-    public Produto save(Produto produto) {
+    public Produto salvar(Produto produto) {
         return produtoRepositorio.save(produto);
     }
 
-    public void delete(Long id) {
+    public void deletar(Long id) {
     if (!produtoRepositorio.existsById(id)) {
         throw new EntityNotFoundException("Produto não encontrado com ID: " + id);
     }
