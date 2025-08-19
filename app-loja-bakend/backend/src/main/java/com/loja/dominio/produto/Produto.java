@@ -1,8 +1,6 @@
 package com.loja.dominio.produto;
 
 import java.math.BigDecimal;
-
-
 import com.loja.dominio.categoria.Categoria;
 
 import jakarta.persistence.Entity;

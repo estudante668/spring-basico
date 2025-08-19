@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.loja.dominio.produto.Produto;
+import com.loja.dto.ProdutosDTO;
 import com.loja.servico.ProdutoServico;
 
 @RestController
@@ -26,28 +26,28 @@ public class Controle {
     }
 
     @GetMapping
-    public List<Produto> getAll() {
-        return produtoServico.listaTodos();
+    public List<ProdutosDTO> getAll() {
+        return produtoServico.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> BuscarPorId(@PathVariable Long id) {
+    public ResponseEntity<ProdutosDTO> BuscarPorId(@PathVariable Long id) {
         return produtoServico.listarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Produto criar(@RequestBody Produto produto) {
-        return produtoServico.salvar(produto);
+    public ProdutosDTO criar(@RequestBody ProdutosDTO produtosDTO) {
+        return produtoServico.salvar(produtosDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+    public ResponseEntity<ProdutosDTO> atualizar(@PathVariable Long id, @RequestBody ProdutosDTO produtosDTO) {
         return produtoServico.listarPorId(id)
                 .map(existing -> {
-                    produto.setId(id);
-                    return ResponseEntity.ok(produtoServico.salvar(produto));
+                    produtosDTO.setId(id);
+                    return ResponseEntity.ok(produtoServico.salvar(produtosDTO));
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -56,7 +56,7 @@ public class Controle {
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         return produtoServico.listarPorId(id)
                 .map(existing -> {
-                    produtoServico.deletar(id);
+                    produtoServico.deletarProduto(id);
                     return ResponseEntity.noContent().build();
                 })
                 .orElse(ResponseEntity.notFound().build());

@@ -13,6 +13,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     //Sempre que ProdutoNotFoundException for lançada esse metodo é acionado
+    //Garante que sempre lança json em caso de erro na API
     @ExceptionHandler(ProdutoNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleProdutoNotFound(ProdutoNotFoundException erroProduto) {
         Map<String, Object> body = new HashMap<>();
