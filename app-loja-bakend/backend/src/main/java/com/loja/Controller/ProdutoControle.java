@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.loja.produto.Produto;
 import com.loja.servico.ProdutoServicos;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,14 +48,14 @@ public class ProdutoControle {
 
     //Criar um novo produto
     @PostMapping
-    public ResponseEntity<Produto> criarProduto(@RequestBody Produto produto) {
+    public ResponseEntity<Produto> criarProduto( @Valid @RequestBody Produto produto) {
         Produto novoProduto = produtoServicos.save(produto);
         return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
     }
 
     //Atualizar um produto existente
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produtoAtualizado) {
         try {
             Produto produtoExistente = produtoServicos.update(id, produtoAtualizado);
             return ResponseEntity.ok(produtoExistente);
@@ -63,6 +66,7 @@ public class ProdutoControle {
 
     //Deletar um produto
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
         try {
             produtoServicos.deleteById(id);

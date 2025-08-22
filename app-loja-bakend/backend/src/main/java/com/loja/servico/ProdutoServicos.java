@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.loja.execption.ProdutoNotFoundException;
 import com.loja.produto.Produto;
 import com.loja.repositorio.ProdutoRepositorio;
 
@@ -27,10 +28,6 @@ public class ProdutoServicos {
     }
 
     public Produto save(Produto produto) {
-        // Exemplo de lógica de negócio:
-        // if (produto.getPreco().compareTo(BigDecimal.ZERO) < 0) {
-        //     throw new IllegalArgumentException("Preço não pode ser negativo.");
-        // }
         return produtoRepositorio.save(produto);
     }
 
@@ -41,12 +38,12 @@ public class ProdutoServicos {
                 produtoExistente.setPreco(produtoAtualizado.getPreco());
                 return produtoRepositorio.save(produtoExistente);
             })
-            .orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
+            .orElseThrow(() -> new ProdutoNotFoundException(id));
     }
 
-    public void deleteById(Long id) {
+     public void deleteById(Long id) {
         if (!produtoRepositorio.existsById(id)) {
-            throw new RuntimeException("Produto não encontrado com id: " + id);
+            throw new ProdutoNotFoundException(id); // Lança a exceção aqui
         }
         produtoRepositorio.deleteById(id);
     }
