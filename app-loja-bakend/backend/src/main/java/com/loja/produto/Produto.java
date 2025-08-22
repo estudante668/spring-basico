@@ -1,22 +1,26 @@
-package com.loja.dominio.produto;
+package com.loja.produto;
 
 import java.math.BigDecimal;
-import com.loja.dominio.categoria.Categoria;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
-@Data                   // Lombok cria os acessos da classe
-@NoArgsConstructor      // Construtor vazio para instanciamentos           
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "produtos")
 public class Produto {
 
     @Id
@@ -26,20 +30,17 @@ public class Produto {
     @NotBlank
     private String nome;
 
-    @NotNull    
-    private BigDecimal preco;
+   @NotNull    
+   @DecimalMin("0.01")
+   private BigDecimal preco;
 
-    @ManyToOne
-    private Categoria categoria;
+    // @ManyToOne
+   // private Categoria categoria;
 
-    private String description;
+   // private String description;
 
-    private boolean active;
+    //private boolean active;
 
-    public Produto(Long id, @NotBlank String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
+    
 }
 

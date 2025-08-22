@@ -1,9 +1,9 @@
-package com.loja.dominio.repositorio;
+package com.loja.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.loja.dominio.produto.Produto;
+import com.loja.produto.Produto;
 
 //camada de percistencia com banco dados
 @Repository

@@ -1,0 +1,1 @@
+INSERT INTO tabela (id, nome) VALUES (1L, 'Mauricio corno');
